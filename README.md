@@ -7,6 +7,12 @@ contenedores Docker y usa **PostgreSQL** como almacenamiento intermedio.
 - Notebook principal: [`notebooks/Binary classification.ipynb`](notebooks/Binary%20classification.ipynb)
 - Datos de entrada: [`data/dataset.csv`](data/dataset.csv) (10 000 registros)
 - Instrucciones detalladas: [`INSTRUCCIONES.md`](INSTRUCCIONES.md) / `INSTRUCCIONES.pdf`
+- Resultados: [`RESULTADOS.md`](RESULTADOS.md) 
+
+## Uso de IA
+
+* Se utilizo el modelo Claude Opus 4.8 en modo de Plan para crear un plan de trabajo con el fin de completar todos los pasos de la tarea. Claude me fue guiando y explicando las instrucciones. Esto fue de gran ayuda ya que paso a paso iba entrando en detalle sobre como funcionaba el procesamiento de los datos y los requerimientos.
+
 
 ## Arquitectura
 
