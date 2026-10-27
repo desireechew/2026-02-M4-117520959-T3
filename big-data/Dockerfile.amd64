@@ -1,0 +1,56 @@
+FROM eclipse-temurin:17-jdk-alpine
+
+ENV VIRTUAL_ENV=/opt/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+ENV SPARK_HOME=/opt/venv/lib/python3.12/site-packages/pyspark
+
+ENV ELASTICSEARCH_SPARK_VERSION=8.14.3
+ENV POSTGRESQL_JDBC_VERSION=42.7.3
+
+RUN apk add --no-cache \
+    bash \
+    nano \
+    curl \
+    wget \
+    build-base \
+    postgresql-client \
+    postgresql-dev \
+    python3 \
+    python3-dev \
+    libffi-dev \
+    openblas-dev \
+    zlib-dev \
+    jpeg-dev \
+    zeromq-dev \
+    py3-pip \
+    py3-virtualenv && \
+  python3 -m venv $VIRTUAL_ENV && \
+  pip install --upgrade pip setuptools wheel && \
+  pip install \
+    numpy \
+    pandas \
+    pyarrow \
+    matplotlib \
+    seaborn \
+    pyspark==3.5.1 \
+    pytest \
+    notebook \
+    findspark \
+    psycopg2-binary \
+    sqlalchemy \
+    elasticsearch==8.14.0 \
+    sentence-transformers \
+    torch \
+    transformers \
+    scikit-learn \
+    scipy \
+    tqdm && \
+  mkdir -p $SPARK_HOME/jars && \
+  wget -O $SPARK_HOME/jars/elasticsearch-spark-30_2.12-${ELASTICSEARCH_SPARK_VERSION}.jar \
+    https://repo1.maven.org/maven2/org/elasticsearch/elasticsearch-spark-30_2.12/${ELASTICSEARCH_SPARK_VERSION}/elasticsearch-spark-30_2.12-${ELASTICSEARCH_SPARK_VERSION}.jar && \
+  wget -O $SPARK_HOME/jars/postgresql-${POSTGRESQL_JDBC_VERSION}.jar \
+    https://repo1.maven.org/maven2/org/postgresql/postgresql/${POSTGRESQL_JDBC_VERSION}/postgresql-${POSTGRESQL_JDBC_VERSION}.jar
+
+WORKDIR /src
+
+COPY . /src
